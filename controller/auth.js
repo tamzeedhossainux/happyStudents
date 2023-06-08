@@ -17,7 +17,7 @@ export const user_register = async (req, res, next) =>{
             }
 
             await userCollection.create(newUser)
-            res.status(200).send('Admin created!')
+            res.status(200).send('User created!')
       }catch(err){
             next(err)
       }

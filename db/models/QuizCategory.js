@@ -17,7 +17,7 @@ export const quizCategoryCollection = sequelize.define('quiz_category',{
             ,allowNull:false
             ,unique:false               
         },
-        log:{
+        logo:{
             type:Sequelize.STRING
             ,allowNull:false
             ,unique:false               
