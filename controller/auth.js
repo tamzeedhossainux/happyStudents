@@ -49,3 +49,18 @@ export const user_login = async (req, res, next) =>{
             next(err)
       }
 }
+
+export const getUsers = async (req, res, next) =>{
+      try{
+            const { user, body } = req
+            const quizes = await quizCollection.findAll({
+                  where:{
+                        isAdmin: false
+                  }
+            })
+            res.status(200).send(quizes)
+
+      } catch(err){
+            next(err)
+      }
+}

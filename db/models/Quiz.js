@@ -1,6 +1,6 @@
 import { sequelize } from '../connection.js'
 import Sequelize from 'sequelize'
-import { quizcategoryCollection } from './QuizCategory';
+import { quizCategoryCollection } from "./QuizCategory.js";
 
 export const quizCollection = sequelize.define('quiz',{
       createdBy:{
@@ -53,5 +53,16 @@ export const quizCollection = sequelize.define('quiz',{
             ,allowNull:false
             ,unique:false               
         },
+        quizCategotyId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+              model: quizCategoryCollection,
+              key: 'id'
+            }
+          }
   });
-  quizCollection.belongsTo(quizcategoryCollection);
+
+  // Establish the association
+  quizCollection.belongsTo(quizCategoryCollection, { foreignKey: 'quizCategotyId' });
+  quizCategoryCollection.hasMany(quizCollection, { foreignKey: 'quizCategotyId' });

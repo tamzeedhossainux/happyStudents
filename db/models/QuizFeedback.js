@@ -12,13 +12,34 @@ export const quizFeedBackCollection = sequelize.define('quiz_feedback',{
       feedback:{
             type:Sequelize.STRING
             ,allowNull:false
-            ,unique:true               
+            ,unique:false               
         },
         complexityLevel:{
-            type:Sequelize.STRING
+            type:Sequelize.INTEGER
             ,allowNull:false
             ,unique:false               
         },
+        userId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+              model: userCollection,
+              key: 'id'
+            }
+          },
+          quizId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+              model: quizCollection,
+              key: 'id'
+            }
+          }
   });
-  quizFeedBackCollection.belongsTo(userCollection);
-  quizFeedBackCollection.belongsTo(quizCollection);
+
+  // Establish the association
+  quizFeedBackCollection.belongsTo(userCollection, { foreignKey: 'userId' });
+  userCollection.hasMany(quizFeedBackCollection, { foreignKey: 'userId' });
+
+  quizFeedBackCollection.belongsTo(quizCollection, { foreignKey: 'quizId' });
+  quizCollection.hasMany(quizFeedBackCollection, { foreignKey: 'quizId' });

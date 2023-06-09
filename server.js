@@ -6,6 +6,8 @@ import cookieParse from "cookie-parser"
 import { sequelize } from './db/connection.js'
 import authRouter from "./routes/auth.js";
 import quizCategoryRouter from "./routes/quizCategory.js"
+import quizrouter from "./routes/quiz.js";
+import quizQuestionrouter from "./routes/quizQuestion.js";
 
 dotenv.config()
 
@@ -19,6 +21,8 @@ const port = process.env.PORT || 8000
 //mapping routings
 app.use('/api/auth', authRouter)
 app.use('/api/quizcategory', quizCategoryRouter)
+app.use('/api/quiz', quizrouter)
+app.use('/api/quiz', quizQuestionrouter)
 
 
 app.use((err, req, res, next) => {

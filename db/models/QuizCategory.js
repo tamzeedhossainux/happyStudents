@@ -10,7 +10,7 @@ export const quizCategoryCollection = sequelize.define('quiz_category',{
       title:{
             type:Sequelize.STRING
             ,allowNull:false
-            ,unique:true               
+            ,unique:false               
         },
         bannerImage:{
             type:Sequelize.STRING
@@ -25,6 +25,6 @@ export const quizCategoryCollection = sequelize.define('quiz_category',{
         isArchive:{
             type:Sequelize.BOOLEAN
             ,allowNull: false
-            ,defaultValue:true              
+            ,defaultValue:false              
         }
   });
