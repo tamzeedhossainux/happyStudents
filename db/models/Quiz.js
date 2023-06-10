@@ -11,7 +11,7 @@ export const quizCollection = sequelize.define('quiz',{
       title:{
             type:Sequelize.STRING
             ,allowNull:false
-            ,unique:true               
+            ,unique:false               
         },
         instruction:{
             type:Sequelize.STRING

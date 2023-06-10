@@ -8,6 +8,7 @@ import authRouter from "./routes/auth.js";
 import quizCategoryRouter from "./routes/quizCategory.js"
 import quizrouter from "./routes/quiz.js";
 import quizQuestionrouter from "./routes/quizQuestion.js";
+import quizAnsrouter from "./routes/quizAnswer.js";
 
 dotenv.config()
 
@@ -22,7 +23,8 @@ const port = process.env.PORT || 8000
 app.use('/api/auth', authRouter)
 app.use('/api/quizcategory', quizCategoryRouter)
 app.use('/api/quiz', quizrouter)
-app.use('/api/quiz', quizQuestionrouter)
+app.use('/api/quiz/question', quizQuestionrouter)
+app.use('/api/quiz/answer', quizAnsrouter)
 
 
 app.use((err, req, res, next) => {

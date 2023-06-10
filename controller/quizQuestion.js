@@ -1,4 +1,5 @@
 import { quizQuestionCollection } from "../db/models/QuizQuestion.js"
+import { quizCollection } from "../db/models/Quiz.js"
 import{createError} from "../utils/error.js"
 
 
@@ -49,7 +50,7 @@ export const getQuizQuestions = async (req, res, next) =>{
               };
 
             const quizeQuestions = await quizQuestionCollection.findAll(filter)
-            res.status(200).send(quizes)
+            res.status(200).send(quizeQuestions)
 
       } catch(err){
             next(err)

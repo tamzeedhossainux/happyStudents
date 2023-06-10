@@ -1,6 +1,5 @@
 import { sequelize } from '../connection.js'
 import Sequelize from 'sequelize'
-import { userCollection } from './User.js';
 import { quizCollection } from './Quiz.js';
 
 export const quizQuestionCollection = sequelize.define('quiz_question',{

@@ -4,6 +4,6 @@ import { verifyToken } from "../utils/authorizer.js";
 
 const router = Express.Router();
 
-router.post('/create', verifyToken, createQuizQuestion)
+router.post('/create/:quizId', verifyToken, createQuizQuestion)
 router.post('/', verifyToken, getQuizQuestions)
 export default router
