@@ -6,6 +6,10 @@ import{createError} from "../utils/error.js"
 export const createQuizQuestion = async (req, res, next) =>{
       try{
             const { user, body, params } = req
+            
+            checkRequiredFields (['id'], user, next)
+            checkRequiredFields(['title', 'quizId', 'tag', 'description', 'type', 'option1', 'option2', 'option3', 'option4'], body, next)
+
             let filter = {
                   where: {
                         "isDeleted": false,
@@ -44,7 +48,6 @@ export const createQuizQuestion = async (req, res, next) =>{
 
 export const getQuizQuestions = async (req, res, next) =>{
       try{
-            const { user, body } = req
             let filter = {
                   order:[['createdAt', 'ASC']]
               };

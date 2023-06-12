@@ -1,6 +1,28 @@
 import { quizAnswerCollection } from "../db/models/QuizAnswer.js"
 import { quizPerticipentHistoryCollection } from "../db/models/QuizPerticipentHistory.js"
 import { quizQuestionCollection } from "../db/models/QuizQuestion.js"
+import { createError } from "../utils/error.js";
+
+const difference = (array1, array2) => {
+  const result = [];
+  
+  for (let i = 0; i < array1.length; i++) {
+    if (!array2.includes(array1[i])) {
+      result.push(array1[i]);
+    }
+  }
+  return result;
+};
+
+
+export const checkRequiredFields = (requiredFields = [], data = {}, next) => {
+  const missingFields = difference(requiredFields, Object.keys(data))
+  console.log(missingFields)
+  if (missingFields.length > 0) {
+      return next(createError(400, `Missing ${missingFields}`))
+  }
+}
+
 export const perticipentHistoryCreation = async (user, body, params) =>{
       const newHistory = {
             userId: user.id,

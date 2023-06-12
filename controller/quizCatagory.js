@@ -5,6 +5,9 @@ export const createQuizCategory = async (req, res, next) =>{
       try{
             const { user, body } = req
 
+            checkRequiredFields (['id'], user, next)
+            checkRequiredFields(['title', 'bannerImage', 'logo'], body, next)
+
             const newCategory = {
                   createdBy : user.id,
                   title: body?.title,

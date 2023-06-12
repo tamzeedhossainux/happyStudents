@@ -1,9 +1,12 @@
 import { quizCollection } from "../db/models/Quiz.js";
+import { checkRequiredFields } from "../helper/helper.js";
 import{createError} from "../utils/error.js"
 
 export const createQuiz = async (req, res, next) =>{
       try{
             const { user, body } = req
+            checkRequiredFields (['id'], user, next)
+            checkRequiredFields(['title', 'instruction', 'tag', 'quizCategotyId'], body, next)
             const newQuiz = {
                   title: body.title,
                   instruction: body?.instruction,
@@ -29,6 +32,7 @@ export const createQuiz = async (req, res, next) =>{
 export const getQuizes = async (req, res, next) =>{
       try{
             const { user, body } = req
+            checkRequiredFields (['id'], user, next)
             let filter = {
                   order:[['createdAt', 'DESC']]
       
@@ -55,6 +59,7 @@ export const getQuizes = async (req, res, next) =>{
 export const getQuiz = async (req, res, next) =>{
       try{
             const { user, params } = req
+            checkRequiredFields (['id'], user, next)
             let filter = {
                   where: {
                         "isDeleted": false,
@@ -77,6 +82,7 @@ export const getQuiz = async (req, res, next) =>{
 export const updateQuiz = async (req, res, next) =>{
       try{
             const { user, body, params } = req
+            checkRequiredFields (['id'], user, next)
             let filter = {
                   where: {
                         "isDeleted": false,

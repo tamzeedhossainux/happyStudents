@@ -3,10 +3,13 @@ import{createError} from "../utils/error.js"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import { userCollection } from "../db/models/User.js"
+import { checkRequiredFields } from "../helper/helper.js"
 dotenv.config()
 
 export const user_register = async (req, res, next) =>{
       try{
+            const { body } = req
+            checkRequiredFields(['name', 'email', 'password'], body, next)
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(req.body.password, salt);
             const newUser = {
@@ -25,6 +28,10 @@ export const user_register = async (req, res, next) =>{
 
 export const user_login = async (req, res, next) =>{
       try{
+            const { body } = req
+
+            checkRequiredFields(['email', 'password'], body, next)
+
             const user = await userCollection.findOne({where:{email:req.body.email}})
             if(!user) return next(createError(404, 'user not found!'))
 
