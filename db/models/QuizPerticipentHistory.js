@@ -6,51 +6,61 @@ quizPerticipentHistoryCollection and the userCollection and quizCollection using
 hasMany methods. */
 import { sequelize } from '../connection.js'
 import Sequelize from 'sequelize'
-import { quizCollection } from './Quiz.js';
-import { userCollection } from './User.js';
+import { quizCollection } from './Quiz.js'
+import { userCollection } from './User.js'
 
-export const quizPerticipentHistoryCollection = sequelize.define('quiz_perticipent_history',{
-      userId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-                  references: {
-                  model: userCollection,
-                  key: 'id'
-            }
-      },
-      quizId: {
+export const quizPerticipentHistoryCollection = sequelize.define(
+  'quiz_perticipent_history',
+  {
+    userId: {
       type: Sequelize.INTEGER,
       allowNull: false,
-            references: {
-                  model: quizCollection,
-                  key: 'id'
-            }
-      },
-      startDate:{
-            type:Sequelize.DATE
-            ,allowNull:false
-            ,unique:false               
-      },
-      endDate:{
-            type:Sequelize.DATE
-            ,allowNull:false
-            ,unique:false               
-      },
-      isComplete:{
-            type:Sequelize.BOOLEAN
-            ,allowNull:false
-            ,defaultValue:true               
-      },
-      score:{
-            type:Sequelize.INTEGER
-            ,allowNull:false
-            ,unique:false               
-      },
-     
-  });
+      references: {
+        model: userCollection,
+        key: 'id'
+      }
+    },
+    quizId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: quizCollection,
+        key: 'id'
+      }
+    },
+    startDate: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      unique: false
+    },
+    endDate: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      unique: false
+    },
+    isComplete: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    score: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      unique: false
+    }
+  }
+)
 
-  quizPerticipentHistoryCollection.belongsTo(userCollection, { foreignKey: 'userId' });
-  userCollection.hasMany(quizPerticipentHistoryCollection, { foreignKey: 'userId' });
+quizPerticipentHistoryCollection.belongsTo(userCollection, {
+  foreignKey: 'userId'
+})
+userCollection.hasMany(quizPerticipentHistoryCollection, {
+  foreignKey: 'userId'
+})
 
-  quizPerticipentHistoryCollection.belongsTo(quizCollection, { foreignKey: 'quizId' });
-  quizCollection.hasMany(quizPerticipentHistoryCollection, { foreignKey: 'quizId' });
+quizPerticipentHistoryCollection.belongsTo(quizCollection, {
+  foreignKey: 'quizId'
+})
+quizCollection.hasMany(quizPerticipentHistoryCollection, {
+  foreignKey: 'quizId'
+})

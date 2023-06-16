@@ -1,8 +1,11 @@
-import  Express  from "express";
-import { createQuizQuestion, getQuizQuestions } from "../controller/quizQuestion.js";
-import { verifyToken } from "../utils/authorizer.js";
+import Express from 'express'
+import {
+  createQuizQuestion,
+  getQuizQuestions
+} from '../controller/quizQuestion.js'
+import { verifyToken } from '../utils/authorizer.js'
 
-const router = Express.Router();
+const router = Express.Router()
 
 router.post('/create/:quizId', verifyToken, createQuizQuestion)
 router.post('/', verifyToken, getQuizQuestions)
