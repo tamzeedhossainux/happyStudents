@@ -1,4 +1,6 @@
 import { quizCollection } from '../db/models/Quiz.js'
+import { quizCategoryCollection } from '../db/models/QuizCategory.js'
+import { quizPerticipentHistoryCollection } from '../db/models/QuizPerticipentHistory.js'
 import { checkRequiredFields } from '../helper/helper.js'
 import { createError } from '../utils/error.js'
 
@@ -33,7 +35,7 @@ export const createQuiz = async (req, res, next) => {
 
 export const getQuizes = async (req, res, next) => {
   try {
-    const { user, body } = req
+    const { user } = req
     checkRequiredFields(['id'], user, next)
     const filter = {
       order: [['createdAt', 'DESC']]
@@ -45,12 +47,34 @@ export const getQuizes = async (req, res, next) => {
       filter.where.createdBy = user.id
     }
 
-    if (user.isAdmin && body?.userId) {
-      filter.where.createdBy = body.userId
-    }
+    filter.include = [{ model: quizCategoryCollection }]
 
     const quizes = await quizCollection.findAll(filter)
-    res.status(200).send(quizes)
+
+    const participantFilter = {
+      where: {
+        userId: user.id,
+        quizId: quizes.map((quiz) => quiz.id)
+      },
+      attributes: ['quizId']
+    }
+
+    const participants = await quizPerticipentHistoryCollection.findAll(
+      participantFilter
+    )
+    console.log('participants', participants)
+
+    const participantSet = new Set(
+      participants.map((participant) => participant.quizId)
+    )
+    console.log('participantSet', participantSet)
+
+    const quizzesWithParticipantFlag = quizes.map((quiz) => ({
+      ...quiz.toJSON(),
+      isParticipant: participantSet.has(quiz.id)
+    }))
+
+    res.status(200).send(quizzesWithParticipantFlag)
   } catch (err) {
     next(err)
   }

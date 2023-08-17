@@ -1,7 +1,10 @@
 import { quizQuestionCollection } from '../db/models/QuizQuestion.js'
+import { quizFeedBackCollection } from '../db/models/QuizFeedback.js'
+import { quizPerticipentHistoryCollection } from '../db/models/QuizPerticipentHistory.js'
+import { quizAnswerCollection } from '../db/models/QuizAnswer.js'
 import { quizCollection } from '../db/models/Quiz.js'
 import { createError } from '../utils/error.js'
-import { checkRequiredFields } from '../helper/helper.js'
+import { calculateWithJoinQuiz, checkRequiredFields } from '../helper/helper.js'
 
 export const createQuizQuestion = async (req, res, next) => {
   try {
@@ -62,12 +65,33 @@ export const createQuizQuestion = async (req, res, next) => {
 
 export const getQuizQuestions = async (req, res, next) => {
   try {
-    const filter = {
-      order: [['createdAt', 'ASC']]
+    const participant = await quizPerticipentHistoryCollection.findOne({
+      where:{
+        quizId: req.body.quizId,
+        userId: req.user.id
+      }
+    }) || []
+    const questionQuery = {
+      where:{
+        quizId: req.body.quizId,
+      }
     }
+    const isJoined = false
+    if(participant.length > 0){
+      isJoined = true
+      questionQuery.include = [{model: quizAnswerCollection}]
+    }
+    const questions = await quizQuestionCollection.findAll(questionQuery)
+    const quizFeedbacks = await quizFeedBackCollection.findAll({
+      where:{
+        quizId: req.body.quizId,
+        userId: req.user.id
+      }
+    }) || []
 
-    const quizeQuestions = await quizQuestionCollection.findAll(filter)
-    res.status(200).send(quizeQuestions)
+    questions.feedbacks = {...quizFeedbacks}
+    questions.isJoiend = isJoined
+    res.status(200).send(questions)
   } catch (err) {
     next(err)
   }

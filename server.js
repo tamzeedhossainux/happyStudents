@@ -12,6 +12,7 @@ import quizCategoryRouter from './routes/quizCategory.js'
 import quizrouter from './routes/quiz.js'
 import quizQuestionrouter from './routes/quizQuestion.js'
 import quizAnsrouter from './routes/quizAnswer.js'
+import feedBackrouter from './routes/quizFeedback.js'
 
 dotenv.config()
 const upload = multer()
@@ -29,6 +30,7 @@ app.use('/api/quizcategory', quizCategoryRouter)
 app.use('/api/quiz', quizrouter)
 app.use('/api/quiz/question', quizQuestionrouter)
 app.use('/api/quiz/answer', quizAnsrouter)
+app.use('/api/quiz/feedback', feedBackrouter)
 app.use('/uploads/logo', Express.static('uploads/logo'))
 app.use('/uploads/banner', Express.static('uploads/banner'))
 
