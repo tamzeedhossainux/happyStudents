@@ -37,7 +37,12 @@ app.get('/', (req, res) => {
 //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 //   credentials: true,
 // }));
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+const corsOptions = {
+  // origin: 'http://127.0.0.1:5173',
+  origin: 'http://localhost:3000',
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 
 const port = process.env.PORT || 8000

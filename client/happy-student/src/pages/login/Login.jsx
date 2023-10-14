@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+//import Cookies from 'universal-cookie'
 
 function Login() {
   const navigate = useNavigate();
+  //const cookies =  new Cookies()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -17,12 +19,13 @@ function Login() {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:5000/api/auth/user/login', {
+      const response = await fetch('/api/auth/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: 'include'
       });
       
       if (response.ok) {

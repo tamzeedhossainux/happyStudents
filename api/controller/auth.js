@@ -52,11 +52,12 @@ export const user_login = async (req, res, next) => {
 
     const { password, isAdmin, ...otherDetails } = user.dataValues
 
-    res
-      .cookie('access_token', token, {
-        httpOnly: true,
-        path: '/'
-      })
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      path: '/',
+      domain: 'localhost',
+      secure: false, // Set to false if using HTTP
+    })
       .status(200)
       .json({ ...otherDetails })
   } catch (err) {

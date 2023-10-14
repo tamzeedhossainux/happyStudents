@@ -4,8 +4,9 @@ import { createError } from './error.js'
 dotenv.config()
 
 export const verifyToken = async (req, res, next) => {
-  console.log('request =======>>>>', req)
+  console.log('request =======>>>>', req?.cookies)
   const token = req.cookies.access_token
+  console.log('token =======>>>>', token)
   if (!token) {
     return next(createError(401, 'You are not authenticated!'))
   }
