@@ -10,6 +10,8 @@ import Contact from "../pages/Contact/Contact";
 import Dashboard from "../Layout/Dashboard";
 import SubmitQuestions from "../pages/DashBoard/SubmitQuestions/SubmitQuestions";
 import ErrorPage from "../componets/ErrorPage/Errorpage";
+import QuizView from "../pages/DashBoard/QuizView/QuizView";
+import QuizViewDescription from "../pages/DashBoard/QuizViewDescription/QuizViewDescription";
 
 export const router = createBrowserRouter(
     [
@@ -49,12 +51,21 @@ export const router = createBrowserRouter(
                 {
                     path: '/signup',
                     element: <SignUp />
+                },
+                {
+                    path: '/quizview',
+                    element: <QuizView />
+                },
+                {
+                    path: '/quizviewdescription',
+                    element: <QuizViewDescription />
                 }
             ]
         },
         {
             path: '/dashboard',
             element: <Dashboard />,
+
             // children: [
             //     {
             //         path: '/submitquestions',

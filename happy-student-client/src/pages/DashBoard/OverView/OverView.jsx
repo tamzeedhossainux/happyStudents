@@ -34,6 +34,9 @@ const OverView = () => {
                             <button id='view'>
                                 <span id='comments'>View All Comments</span>
                             </button>
+                            <button id='edit'>
+                                <span id='quiz'>Edit Quiz</span>
+                            </button>
                         </div>
                     </div>
                     <div id='right_side'>

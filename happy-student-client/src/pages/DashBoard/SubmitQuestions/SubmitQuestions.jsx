@@ -1,58 +1,62 @@
 import React from 'react';
 import './SubmitQuestions.css';
+import { FaPlus } from "react-icons/fa";
 const SubmitQuestions = () => {
     return (
         <>
             <section className='container'>
                 <section className='mt-4'>
-                    <h3 id='text-submit'><span className='text-submit'>Submit Yo</span>ur Questions</h3>
+                    <div className="d-flex">
+                        <h3 id='text-submit'><span className='text-submit'>Submit Yo</span>ur Questions</h3>
+                        <input type="text" id='addCategory' placeholder='Add new category' />
+                        <button className="btn btn-primary waves-effect waves-light mx-2 deviceSubmit" id='plus'>
+                            <FaPlus />
+
+                        </button>
+
+
+                    </div>
                     <form>
-                        <div className="row">
-                            <div className="col">
-                                <label className='input-text' htmlFor="name">Name</label>
-                                <input type="text" name='name' className="form-control input-text input-field" placeholder="Your Name" />
-                            </div>
-                            <div className="col">
-                                <label htmlFor="email" className='input-text'>Email Address</label>
-                                <input type="email" name='email' className="form-control input-field input-text" placeholder="Your Email Address" />
-                            </div>
-                        </div><br />
-                        <div className="col">
-                            <label htmlFor="name" className='input-text'>Subject</label>
-                            <input type="text" className="form-control  input-text input-subject" placeholder="Subject of your questions" />
-                        </div><br />
-                        <div className="col">
-                            <label htmlFor="name" className='input-text'>Last Name</label>
-                            <input type="text" className="form-control  input-text input-lastName" placeholder="Enter your comments" />
-                        </div><br /><br />
-                        <section className='d-flex'>
-                            <div >
-                                <h1 id='multiple-text'>Add Multiple options</h1>
-                                <div className='option'>
-                                    <input type="radio" name="option 1" className='text-option' /> Option 1
 
-                                </div><br />
-                                <div className='option'>
-                                    <input type="radio" name="option 1" className='text-option' /> Option 1
 
-                                </div><br />
-                                <div className='option'>
-                                    <input type='radio' id='circle'></input><span id='text-circle'> Add option or "Add More"</span>
-                                    {/* <input type="radio" name="option 1" className='text-option' /> Add option or "Add More" */}
-                                </div>
-                            </div>
+                        <div className="row mt-4">
                             <div>
-                                <div>
-                                    <h1 className='text_file'>File Upload</h1>
-                                    <div className="file_upload">
-                                        <h5 id='file-drop'>Select a file or drag and drop here</h5>
-                                        <p id='file-size'>JPG PNG or PDF, file size no more than 10MB</p>
-                                        <button className='file_button'>SELECT FILE</button>
-                                    </div><br />
-                                    <button className='file_submit'>Submit</button>
-                                </div>
+                                <label className='input-text' htmlFor="name">Title</label>
+                                <input type="text" name='name' className="form-control input-text input-title" placeholder="Your Name" />
+                            </div><br />
+                            <div className="col mt-3">
+                                <label htmlFor="email" className='input-text'>Instruction</label>
+                                <input type="email" name='email' className="form-control input-field input-text" placeholder="Subject of your questions" />
                             </div>
-                        </section>
+                            <div className="col mt-3">
+                                <label htmlFor="email" className='input-text'>Tag</label>
+                                <input type="email" name='email' className="form-control input-field input-text" placeholder="Code, Node JS,JS" />
+                            </div>
+                            <div className="col mt-3">
+                                <label htmlFor="email" className='input-text'>Published</label>
+                                <input type="email" name='email' className="form-control input-field input-text" placeholder="10/15/2023" />
+                            </div>
+                            <div className="col mt-3">
+                                <label htmlFor="email" className='input-text'>Close Date</label>
+                                <input type="email" name='email' className="form-control input-field input-text" placeholder="15/15/2023" />
+                            </div>
+                            <div className="col mt-3">
+                                <label htmlFor="email" className='input-text'>Total Mark</label>
+                                <input type="email" name='email' className="form-control input-field input-text" placeholder="100" />
+                            </div>
+
+
+                            <div class=" col mt-3">
+                                <label htmlFor="email" className='input-text'>Quiz Category</label>
+                                <select class="form-select form-control input-field input-text" id="floatingSelect" aria-label="Floating label select example">
+
+                                    <option value="1">Flutter</option>
+                                    <option value="2">Node JS</option>
+                                    <option value="3">Java</option>
+                                </select>
+                            </div>
+                        </div><br />
+                        <button className='file_submit mt-5'>Submit</button>
                     </form>
 
                 </section>

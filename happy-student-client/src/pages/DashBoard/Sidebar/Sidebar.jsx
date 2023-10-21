@@ -3,6 +3,7 @@ import '../../../assets/bootstrap/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import './Sidebar.css'
 import OverView from '../OverView/OverView';
+// import QuizView from '../QuizView/QuizView';
 const Sidebar = () => {
     return (
         <>
@@ -45,6 +46,7 @@ const Sidebar = () => {
                     </div>
                 </nav>
                 <OverView />
+                {/* <QuizView /> */}
             </section>
         </>
     );

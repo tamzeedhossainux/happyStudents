@@ -121,6 +121,21 @@
     color: #FFFFFF;
 }
 
+#edit {
+    width: 150px;
+    height: 40px;
+    background-color: #7A4CFC;
+    /* background: #3A3A3A; */
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+#quiz {
+    font-size: 14px;
+    font-weight: 300px;
+    color: #FFFFFF;
+}
+
 /* right_side */
 
 
